@@ -1,8 +1,8 @@
 --[[
     File Name:		ClaimScript.lua
 	Programmer:		Mickaël Papineau
-	Date:			2021/04/30
-	Version:		1.1.0
+	Date:			2021/05/25
+	Version:		1.2.0
 	Description:    This script is to claim a postal with an command.
 ]]--
 
@@ -15,13 +15,30 @@ RegisterCommand("claim", function(source, name, msg)
 
         TriggerEvent("Notify", 1)
 
-    elseif (tonumber(name[1]) >= 1000 and tonumber(name[1]) <= 9999) then
-
-        TriggerServerEvent("claimAdd", GetPlayerName(PlayerId()), tonumber(name[1]))
-
     else
 
-        TriggerEvent("Notify", 1)
+        local match = false
+
+        for i = 1, PostalList[1].num, 1 do
+
+            if (tonumber(name[1]) == PostalList[i].postal) then
+
+                match = true
+                break
+
+            end
+
+        end
+
+        if (match == true) then
+
+            TriggerServerEvent("claimAdd", GetPlayerName(PlayerId()), tonumber(name[1]))
+
+        else
+
+            TriggerEvent("Notify", 1)
+
+        end
 
     end
 

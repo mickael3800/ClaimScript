@@ -3,7 +3,13 @@ game 'gta5'
 
 author 'Mickaël Papineau'
 description 'Claims a postal with an command'
-version '1.1.0'
+version '1.2.0'
 
-client_script 'ClaimScript.lua'
-server_script 'ClaimScriptServer.lua'
+client_scripts {
+    'ClaimScript.lua',
+    'PostalList.lua'
+}
+
+server_scripts {
+    'ClaimScriptServer.lua'
+}

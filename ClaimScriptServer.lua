@@ -1,22 +1,22 @@
 --[[
     File Name:		ClaimScriptServer.lua
 	Programmer:		Mickaël Papineau
-	Date:			2021/04/30
-	Version:		1.1.0
+	Date:			2021/05/25
+	Version:		1.2.0
 	Description:    This script is to claim a postal with an command.
 ]]--
 
 --Variables [Do Not Modify]
-local Postal = {}
-local ID = {}
+local List = {}
 
 RegisterNetEvent("claimAdd")
 AddEventHandler("claimAdd", function(name, postal)
 
-    if (Postal[source] == nil) then
+    if (List[source] == nil) then
 
-        Postal[source] = postal
-        ID[source] = name
+        List[source] = {{Postal = nil, ID = nil}}
+        List[source].Postal = postal
+        List[source].ID = name
 
         TriggerClientEvent("chat:addMessage", -1, {
             color = {255, 165, 0},
@@ -38,11 +38,10 @@ AddEventHandler("claimRemove", function()
     TriggerClientEvent("chat:addMessage", -1, {
         color = {255, 165, 0},
         multiline = true,
-        args = {ID[source] .. " | Unclaimed Postal", Postal[source]}
+        args = {List[source].ID .. " | Unclaimed Postal", List[source].Postal}
     })
 
-    Postal[source] = nil
-    ID[source] = nil
+    List[source] = nil
 
 end)
 
@@ -59,14 +58,14 @@ AddEventHandler("claimList", function()
 
     for i = 1, 999, 1 do
 
-        if (Postal[i] == nil) then
+        if (List[i].Postal == nil) then
 
         else
 
             TriggerClientEvent("chat:addMessage", source, {
                 color = {255, 165, 0},
                 multiline = true,
-                args = {ID[i] .. " | Claimed Postal", Postal[i]}
+                args = {List[i].ID .. " | Claimed Postal", List[i].Postal}
             })
 
             num = num +1
@@ -95,7 +94,7 @@ end)
 
 AddEventHandler("playerDropped", function()
 
-    Postal[source] = nil
-    ID[source] = nil
+    List[source].Postal = nil
+    List[source].ID = nil
 
 end)
