@@ -2,6 +2,9 @@
 ClaimScript is a script that claims a postal with an command.
 # Changelog
 
+### V1.2.1
+* Changes within the script's folder
+
 ### V1.2.0
 * Merged both server side tables into one
 * Added an postal list to have precised postals to verify.
@@ -10,4 +13,8 @@ ClaimScript is a script that claims a postal with an command.
 * Fixed bugs found during testing.
 
 # Dependencies and sources
+## Dependencies
+* None
+
+## Sources
 * None
